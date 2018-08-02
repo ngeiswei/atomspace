@@ -340,7 +340,9 @@ void QuoteUTest::test_bind_closed_lambda(void)
 
     eval->eval("(load-from-path \"tests/query/quote-bind-lambda.scm\")");
 
-    Handle result = eval->eval_h("(cog-execute! bl)"),
+    Instantiator inst(as);
+    Handle bl = eval->eval_h("bl"),
+        result = HandleCast(inst.execute(bl)),
         expected = eval->eval_h("expected");
 
     TS_ASSERT_EQUALS(result, expected);
