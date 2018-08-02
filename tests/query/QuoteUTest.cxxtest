@@ -71,6 +71,7 @@ public:
     void test_numeric_greater(void);
     void test_crash(void);
     void test_exec_getlink(void);
+    void test_bind_closed_lambda(void);
 };
 
 void QuoteUTest::tearDown(void)
@@ -327,6 +328,22 @@ void QuoteUTest::test_exec_getlink(void)
 
     Handle exe = eval->eval_h("(cog-execute! z-get)");
     TS_ASSERT_EQUALS(1, getarity(exe));
+
+    logger().debug("END TEST: %s", __FUNCTION__);
+}
+
+// Test for bug #1843. Make sure that the quotation inside a closed
+// Lambda are not consumed
+void QuoteUTest::test_bind_closed_lambda(void)
+{
+    logger().debug("BEGIN TEST: %s", __FUNCTION__);
+
+    eval->eval("(load-from-path \"tests/query/quote-bind-lambda.scm\")");
+
+    Handle result = eval->eval_h("(cog-execute! bl)"),
+        expected = eval->eval_h("expected");
+
+    TS_ASSERT_EQUALS(result, expected);
 
     logger().debug("END TEST: %s", __FUNCTION__);
 }
