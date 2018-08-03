@@ -88,9 +88,9 @@ void QuotationUTest::test_root_local_quote_over_consumption()
  * (QuoteLink
  *   (LambdaLink
  *     (UnquoteLink
- *     (VariableNode "$vardecl"))
- *   (UnquoteLink
- *     (VariableNode "$body"))))
+ *       (VariableNode "$vardecl"))
+ *     (UnquoteLink
+ *       (VariableNode "$body"))))
  *
  * does not turn into
  *
