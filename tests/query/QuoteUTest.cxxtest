@@ -22,6 +22,8 @@
 
 #include <opencog/atoms/base/Link.h>
 #include <opencog/atoms/base/Node.h>
+#include <opencog/atoms/core/LambdaLink.h>
+#include <opencog/atoms/execution/Instantiator.h>
 #include <opencog/atomspace/AtomSpace.h>
 #include <opencog/guile/SchemeEval.h>
 #include <opencog/query/BindLinkAPI.h>
@@ -341,11 +343,18 @@ void QuoteUTest::test_bind_closed_lambda(void)
     eval->eval("(load-from-path \"tests/query/quote-bind-lambda.scm\")");
 
     Instantiator inst(as);
-    Handle bl = eval->eval_h("bl"),
-        result = HandleCast(inst.execute(bl)),
-        expected = eval->eval_h("expected");
 
-    TS_ASSERT_EQUALS(result, expected);
+    Handle ll = eval->eval_h("ll"),
+        ll_result = HandleCast(inst.instantiate(ll)),
+        ll_expected = ll;
+
+    TS_ASSERT_EQUALS(ll_result, ll_expected);
+
+    Handle bl = eval->eval_h("bl"),
+        bl_result = HandleCast(inst.execute(bl)),
+        bl_expected = eval->eval_h("expected");
+
+    TS_ASSERT_EQUALS(bl_result, bl_expected);
 
     logger().debug("END TEST: %s", __FUNCTION__);
 }
