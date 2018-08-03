@@ -135,7 +135,7 @@ public:
 	}
 
 	ProtoAtomPtr instantiate(const Handle& expr,
-	                         const HandleMap &vars,
+	                         const HandleMap& vars=HandleMap(),
 	                         bool silent=false);
 	ProtoAtomPtr execute(const Handle& expr, bool silent=false)
 	{
