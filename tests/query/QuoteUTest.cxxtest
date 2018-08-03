@@ -335,7 +335,7 @@ void QuoteUTest::test_exec_getlink(void)
 }
 
 // Test for bug #1843. Make sure that the quotation inside a closed
-// Lambda are not consumed
+// Lambda are not consumed. Actually, wrap it in a quote link for now.
 void QuoteUTest::test_bind_closed_lambda(void)
 {
     logger().debug("BEGIN TEST: %s", __FUNCTION__);
@@ -344,15 +344,12 @@ void QuoteUTest::test_bind_closed_lambda(void)
 
     Instantiator inst(as);
 
-    Handle ll = eval->eval_h("ll"),
-        ll_result = HandleCast(inst.instantiate(ll)),
-        ll_expected = ll;
-
-    TS_ASSERT_EQUALS(ll_result, ll_expected);
-
     Handle bl = eval->eval_h("bl"),
         bl_result = HandleCast(inst.execute(bl)),
         bl_expected = eval->eval_h("expected");
+
+    logger().debug() << "bl_result = " << oc_to_string(bl_result);
+    logger().debug() << "bl_expected = " << oc_to_string(bl_expected);
 
     TS_ASSERT_EQUALS(bl_result, bl_expected);
 
