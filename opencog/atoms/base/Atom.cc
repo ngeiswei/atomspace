@@ -82,6 +82,14 @@ equal_to<opencog::WinkPtr>::operator()(const opencog::WinkPtr& lw,
 
 namespace opencog {
 
+bool content_based_WinkPtr_less::operator()(const opencog::WinkPtr& lw,
+                                            const opencog::WinkPtr& rw) const
+{
+    Handle hl(lw.lock());
+    Handle hr(rw.lock());
+    return content_based_handle_less()(hl, hr);
+}
+
 Atom::~Atom()
 {
     _atom_space = nullptr;

@@ -92,6 +92,12 @@ typedef std::size_t Arity;
 typedef std::vector<LinkPtr> IncomingSet; // use vector; see below.
 typedef SigSlot<AtomPtr, LinkPtr> AtomPairSignal;
 
+// Content based WinkPtr less
+struct content_based_WinkPtr_less
+{
+    bool operator()(const opencog::WinkPtr&, const opencog::WinkPtr&) const;
+};
+
 // typedef std::unordered_set<WinkPtr> WincomingSet;
 typedef std::set<WinkPtr, std::owner_less<WinkPtr> > WincomingSet;
 
