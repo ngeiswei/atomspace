@@ -98,8 +98,20 @@ struct content_based_WinkPtr_less
     bool operator()(const opencog::WinkPtr&, const opencog::WinkPtr&) const;
 };
 
+// Possibly costly but more favorable to reproducibility in pattern
+// matcher and other algorithms
+typedef std::set<WinkPtr, content_based_WinkPtr_less> ContentWincomingSet;
+
+// Less costly than ContentBasedWincomingSet but less favorable to
+// reproducibility
+typedef std::set<WinkPtr, std::owner_less<WinkPtr>> AddressWincomingSet;
+
 // typedef std::unordered_set<WinkPtr> WincomingSet;
-typedef std::set<WinkPtr, std::owner_less<WinkPtr> > WincomingSet;
+#ifdef REPRODUCIBLE_ATOMSPACE
+typedef ContentWincomingSet WincomingSet;
+#else
+typedef AddressWincomingSet WincomingSet;
+#endif
 
 /**
  * Atoms are the basic implementational unit in the system that
