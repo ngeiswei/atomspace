@@ -57,7 +57,7 @@ std::string SchemeSmob::protom_to_string(SCM node)
 	if (nullptr == h->getAtomSpace())
 	{
 		if (ATOMSPACE == h->get_type())
-			return h->to_short_string();
+			return h->to_string();
 
 		h = Handle::UNDEFINED;
 		*((Handle *) SCM_SMOB_DATA(node)) = Handle::UNDEFINED;
@@ -67,7 +67,7 @@ std::string SchemeSmob::protom_to_string(SCM node)
 
 	// Need to have a newline printed; otherewise cog-value->list
 	// prints badly-formatted grunge.
-	return h->to_short_string() + "\n";
+	return h->to_string() + "\n";
 }
 
 /* ============================================================== */
