@@ -1181,8 +1181,8 @@ INHERITANCE_LINK <- ORDERED_LINK, DIRECTLY_EVALUATABLE_LINK
 // tests.  They're somwhat poorly defined. They are currently defined
 // to inherit from CollectionLink, thus allowing them to be set-valued,
 // and used in probabilistic contexts.
-FORALL_LINK <- SCOPE_LINK,COLLECTION_LINK "ForAllLink"
-EXISTS_LINK <- SCOPE_LINK,COLLECTION_LINK
+FORALL_LINK <- SCOPE_LINK,COLLECTION_LINK,CRISP_OUTPUT_LINK "ForAllLink"
+EXISTS_LINK <- SCOPE_LINK,COLLECTION_LINK,CRISP_OUTPUT_LINK
 
 // These are used only in unit tests, at this point.
 // No clear role assigned, other than that there is some "association"
